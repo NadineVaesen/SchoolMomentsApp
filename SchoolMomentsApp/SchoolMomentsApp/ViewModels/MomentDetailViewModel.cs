@@ -43,36 +43,57 @@ namespace SchoolMomentsApp.ViewModels
 
 
 
-        //public ICommand LoadAttendedStudents => new Command(OnLoadAttendedStudents);
-        //public ICommand LoadRequestedStudents => new Command(OnLoadRequestedStudents);
-        //public ICommand LoadAbsentStudents => new Command(OnLoadAbsentStudents);
-        //public ICommand RegisterStudent => new Command(OnRegisterStudent);
+        public ICommand LoadAttendedStudents => new Command(OnLoadAttendedStudents);
+        public ICommand LoadRequestedStudents => new Command(OnLoadRequestedStudents);
+        public ICommand LoadAbsentStudents => new Command(OnLoadAbsentStudents);
+        public ICommand RegisterStudent => new Command(OnRegisterStudent);
+
+        public ICommand AddStudent => new Command(AddRequestedStudent);
 
         private async void OnMomentChanged(MomentDetailViewModel sender, Moment moment)
         {
             Moment = await _momentDataService.GetMomentAsync(moment.MomentId);
         }
 
-        //private void OnLoadAttendedStudents(object obj)
-        //{
-        //    _navigationService.NavigateToAsync<StudentsOverviewViewModel>(SelectedMoment);
-        //}
+        private  void OnLoadAttendedStudents(object obj)
+        {
+             _navigationService.NavigateToAsync<StudentsOverviewViewModel>(Moment.AttendedStudents);
+        }
 
-        //private void OnLoadRequestedStudents(object obj)
-        //{
-        //    _navigationService.NavigateToAsync<StudentsOverviewViewModel>(SelectedMoment);
-        //}
+        private void AddRequestedStudent(object obj)
+        {
+            _navigationService.NavigateToAsync<AddRequestedStudentToMomentViewModel>(this.Moment);
+        }
 
-        //private void OnLoadAbsentStudents(object obj)
-        //{
-        //    _navigationService.NavigateToAsync<StudentsOverviewViewModel>(SelectedMoment);
-        //}
+        private  void OnLoadRequestedStudents(object obj)
+        {
+            _navigationService.NavigateToAsync<StudentsOverviewViewModel>(Moment.RequestedStudents);
+        }
+
+        private async void OnLoadAbsentStudents(object obj)
+        {
+            List<Student> AbsentStudents = new List<Student>();
+            List<Student> RequestStudents = Moment.RequestedStudents;
+            List<Student> AttendedStudents = Moment.AttendedStudents;
+
+            foreach (var student in RequestStudents)
+            {
+                
+                if (!AttendedStudents.Contains(student))
+                {
+                    AbsentStudents.Add(student);
+                }
+             
+         
+            }
+            await _navigationService.NavigateToAsync<StudentsOverviewViewModel>(AbsentStudents);
+        }
 
 
-        //private void OnRegisterStudent(object obj)
-        //{
-        //    _navigationService.NavigateToAsync<RegisterStudentForMomentViewModel>(SelectedMoment);
-        //}
+        private void OnRegisterStudent(object obj)
+        {
+             _navigationService.NavigateToAsync<RegisterStudentForMomentViewModel>(Moment);
+        }
 
 
         public override async Task InitializeAsync(object parameter)

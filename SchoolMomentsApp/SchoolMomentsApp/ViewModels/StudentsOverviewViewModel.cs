@@ -15,7 +15,7 @@ namespace SchoolMomentsApp.ViewModels
     {
         public ObservableCollection<Student> _students;
         private IStudentDataService _studentDataService;
-        
+
 
         public ObservableCollection<Student> Students
         {
@@ -27,18 +27,24 @@ namespace SchoolMomentsApp.ViewModels
             }
         }
 
-        public StudentsOverviewViewModel(INavigationService navigationService, IStudentDataService studentDataService) : base (navigationService)
+        public StudentsOverviewViewModel(INavigationService navigationService, IStudentDataService studentDataService) : base(navigationService)
         {
             _studentDataService = studentDataService;
 
-             
+
         }
 
-        public override async Task  InitializeAsync(object data)
+        public override async Task InitializeAsync(object data)
         {
             IsBusy = true;
-            Console.WriteLine("in MomentOverviewViewModel before calling momentDataService");
-            Students = (await _studentDataService.GetAllStudents()).ToObservableCollection();
+            if(data == null)
+            {
+                Students = (await _studentDataService.GetAllStudents()).ToObservableCollection();
+            } else
+            {
+                Students = (ObservableCollection<Student>)data;
+            }
+            
             IsBusy = false;
 
         }

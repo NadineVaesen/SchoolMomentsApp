@@ -25,12 +25,18 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Views\AddRequestedStudentToMomentView.xaml.cs">
+      <DependentUpon>AddRequestedStudentToMomentView.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\RegisterStudentForMomentView.xaml.cs">
       <DependentUpon>RegisterStudentForMomentView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="Views\AddRequestedStudentToMomentView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Views\LoginView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>

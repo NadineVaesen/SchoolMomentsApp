@@ -1,6 +1,7 @@
 ﻿
 
 using Autofac;
+using SchoolMomentsApp.Models.Repository;
 using SchoolMomentsApp.Services;
 using SchoolMomentsApp.ViewModels;
 using System;
@@ -23,6 +24,7 @@ namespace SchoolMomentsApp.Bootstrap
             builder.RegisterType<RegisterStudentForMomentViewModel>();
             builder.RegisterType<StudentsOverviewViewModel>();
             builder.RegisterType<StudentMainPageViewModel>();
+            builder.RegisterType<AddRequestedStudentToMomentViewModel>();
 
             //services
             builder.RegisterType<LoginDataService>().As<ILoginDataService>();
@@ -30,6 +32,13 @@ namespace SchoolMomentsApp.Bootstrap
             builder.RegisterType<NavigationService>().As<INavigationService>();
             builder.RegisterType<StudentDataService>().As<IStudentDataService>();
             builder.RegisterType<TeacherDataService>().As<ITeacherDataService>();
+            builder.RegisterType<RestService>().As<IRestService>();
+
+            //repositories
+            builder.RegisterType<StudentRepository>().As<IStudentRepository>();
+            builder.RegisterType<TeacherRepository>().As<ITeacherRepository>();
+            builder.RegisterType<MomentRepository>().As<IMomentRepository>();
+            builder.RegisterType<AdministratorRepository>().As<IAdministratorRepository>();
                        
 
             //General

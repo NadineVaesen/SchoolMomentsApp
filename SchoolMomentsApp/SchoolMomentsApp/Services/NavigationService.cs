@@ -11,15 +11,15 @@ using Xamarin.Forms;
 
 namespace SchoolMomentsApp.Services
 {
-   
+
     public class NavigationService : INavigationService
     {
-       
+
 
         private readonly ILoginDataService _loginDataService;
         private readonly Dictionary<Type, Type> _mappings;
         private object role;
-     
+
 
         protected Application CurrentApplication => Application.Current;
 
@@ -30,32 +30,33 @@ namespace SchoolMomentsApp.Services
             _mappings = new Dictionary<Type, Type>();
 
             CreatePageViewModelMappings();
- 
+
         }
 
         public async Task InitializeAsync()
-        { 
+        {
             //check if user is admin, teacher or admin and then nav to right page
             role = _loginDataService.AuthenticateUser();
-            
+
 
             if (role is Teacher)
             {
                 await NavigateToAsync<MomentOverviewViewModel>();
 
-            } else if (role is Student)
+            }
+            else if (role is Student)
             {
                 await NavigateToAsync<StudentMainPageViewModel>();
-            } 
+            }
             else if (role is Administrator)
             {
                 await NavigateToAsync<MomentDetailViewModel>();
-            } 
+            }
             else
             {
                 await NavigateToAsync<LoginViewModel>();
             }
-            
+
         }
 
         public Task NavigateToAsync<TViewModel>() where TViewModel : BaseViewModel
@@ -85,7 +86,7 @@ namespace SchoolMomentsApp.Services
 
         public async Task NavigateBackAsync()
         {
-            //here I need to see who logs in and send them to the correct page
+            //here I need to see who logs in and send them back to the correct page
 
             if (CurrentApplication.MainPage is MomentOverviewView mainPage)
             {
@@ -127,18 +128,29 @@ namespace SchoolMomentsApp.Services
             else if (page is LoginView)
             {
                 CurrentApplication.MainPage = page;
-            } else if (page is StudentMainPageView)
+            }
+            else if (page is StudentMainPageView)
             {
                 CurrentApplication.MainPage = page;
             }
             else if (CurrentApplication.MainPage is MomentOverviewView)
             {
                 var mainPage = CurrentApplication.MainPage as MomentOverviewView;
-                
-            } else if (page is MomentDetailView)
-            {
-                var mainPage = CurrentApplication.MainPage as MomentDetailView;
+
             }
+            if (page is MomentDetailView)
+            {
+                CurrentApplication.MainPage = page;
+            }
+            if (page is StudentsOverviewView)
+            {
+                CurrentApplication.MainPage = page;
+            }
+            if (page is AddRequestedStudentToMomentView)
+            {
+                CurrentApplication.MainPage = page;
+            }
+
 
             await (page.BindingContext as BaseViewModel).InitializeAsync(parameter);
         }
@@ -181,6 +193,7 @@ namespace SchoolMomentsApp.Services
             _mappings.Add(typeof(RegisterStudentForMomentViewModel), typeof(RegisterStudentForMomentView));
             _mappings.Add(typeof(StudentMainPageViewModel), typeof(StudentMainPageView));
             _mappings.Add(typeof(StudentsOverviewViewModel), typeof(StudentsOverviewView));
+            _mappings.Add(typeof(AddRequestedStudentToMomentViewModel), typeof(AddRequestedStudentToMomentView));
         }
     }
 }

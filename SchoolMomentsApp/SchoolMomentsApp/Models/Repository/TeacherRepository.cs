@@ -1,4 +1,6 @@
 ﻿using Newtonsoft.Json;
+using SchoolMomentsApp.Services;
+using SchoolMomentsApp.Utility;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -7,16 +9,23 @@ using System.Threading.Tasks;
 
 namespace SchoolMomentsApp.Models.Repository
 {
-    public static class TeacherRepository
+    public class TeacherRepository : ITeacherRepository
     {
 
-        private static HttpClient _httpClient = InitializeHttpClient();
-        private static Uri BaseUrl = new Uri("http://10.0.2.2:49630/api");
-        private static IEnumerable<Teacher> teachers;
-        public async static Task<IEnumerable<Teacher>> GetTeachers()
+        private Uri url = Constants.BaseURL;
+        private HttpClient _httpClient;
+
+        private IEnumerable<Teacher> teachers;
+
+        public TeacherRepository(IRestService restService)
         {
-   
-            Uri fullUrl = new Uri(BaseUrl + "/teachers");
+            _httpClient = restService.GetHttpClient();
+        }
+
+        public async Task<IEnumerable<Teacher>> GetTeachers()
+        {
+
+            Uri fullUrl = new Uri(url + "/teachers");
 
 
             HttpResponseMessage response = await _httpClient.GetAsync(fullUrl);
@@ -24,19 +33,19 @@ namespace SchoolMomentsApp.Models.Repository
 
             if (response.IsSuccessStatusCode)
             {
-                Console.WriteLine("success");
+
                 string content = await response.Content.ReadAsStringAsync();
-                Console.WriteLine(content);
+
                 teachers = JsonConvert.DeserializeObject<IEnumerable<Teacher>>(content);
                 return teachers;
             }
             return null;
         }
 
-        public async static Task<Teacher> GetTeacher(int id)
+        public async Task<Teacher> GetTeacher(int id)
         {
             HttpClient httpClient = _httpClient;
-            Uri fullUrl = new Uri(BaseUrl + "teachers/" + id);
+            Uri fullUrl = new Uri(url + "/teachers/" + id);
             var options = new JsonSerializerSettings { };
 
 
@@ -51,11 +60,11 @@ namespace SchoolMomentsApp.Models.Repository
             return null;
         }
 
-        public static bool TeacherExistsByTeacherNumber(string teachernumber)
+        public bool TeacherExistsByTeacherNumber(string teachernumber)
         {
-            foreach(var teacher in teachers)
+            foreach (var teacher in teachers)
             {
-                if(teacher.TeacherNumber == teachernumber)
+                if (teacher.TeacherNumber == teachernumber)
                 {
                     return true;
                 }
@@ -63,7 +72,7 @@ namespace SchoolMomentsApp.Models.Repository
             return false;
         }
 
-        private static HttpClient InitializeHttpClient()
+        private HttpClient InitializeHttpClient()
         {
             return _httpClient ?? new HttpClient();
         }

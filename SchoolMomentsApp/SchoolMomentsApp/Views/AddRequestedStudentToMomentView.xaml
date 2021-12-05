@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SchoolMomentsApp.Views.AddRequestedStudentToMomentView"
+             xmlns:utility="clr-namespace:SchoolMomentsApp.Utility;assembly=SchoolMomentsApp" 
+             xmlns:vm="clr-namespace:SchoolMomentsApp.ViewModels" 
+             xmlns:behaviors="clr-namespace:SchoolMomentsApp.Behaviors"
+             utility:ViewModelLocator.AutoWireViewModel="True">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Give id of student to add"/>
+            <Entry Text="{Binding StudentId, Mode=TwoWay}"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+            <Button Text="Submit" Command="{Binding GoBackToMoment}"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

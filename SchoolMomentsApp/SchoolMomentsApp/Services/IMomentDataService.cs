@@ -11,6 +11,7 @@ namespace SchoolMomentsApp.Services
         Task<IEnumerable<Moment>> GetAllMomentsAsync();
 
         Task<Moment> GetMomentAsync(int id);
-        
+
+        Task<Moment> AddRequestedStudent(int id, Moment moment);
     }
 }

@@ -9,14 +9,21 @@ namespace SchoolMomentsApp.Services
 {
     public class StudentDataService : IStudentDataService
     {
+        private IStudentRepository _studentRepository;
+
+        public StudentDataService(IStudentRepository studentRepository)
+        {
+            _studentRepository = studentRepository;
+        }
+
         public Task<IEnumerable<Student>> GetAllStudents()
         {
-            return StudentRepository.GetStudents();
+            return _studentRepository.GetStudents();
         }
 
         public Task<Student> GetStudent(int id)
         {
-            return StudentRepository.GetStudent(id);
+            return _studentRepository.GetStudent(id);
         }
     }
 }

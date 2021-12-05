@@ -129,5 +129,7 @@ namespace SchoolMomentsApp.Behaviors
                 Command.Execute(parameter);
             }
         }
+
+      
     }
 }

@@ -65,7 +65,7 @@ namespace SchoolMomentsApp.ViewModels
 
         private void OnLogin()
         {
-            Console.WriteLine("in OnLogin");
+        
             //if user is known => Determine type of user => navigate to the right page
             object role = _loginDataService.AuthenticateUser();
 
@@ -88,7 +88,7 @@ namespace SchoolMomentsApp.ViewModels
 
         }
 
-        public override Task InitializeAsync(object parameter)
+        public override async Task InitializeAsync(object parameter)
         {
             
             if (parameter is string)
@@ -96,7 +96,7 @@ namespace SchoolMomentsApp.ViewModels
                  ErrorMessage = "This user/password is incorrect. Please enter the correct credentials";
 
             }
-            return Task.Run(null);
+           
             
 
 
