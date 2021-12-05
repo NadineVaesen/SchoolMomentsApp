@@ -23,9 +23,7 @@ namespace SchoolMomentsApp.Models.Repository
 
             if (response.IsSuccessStatusCode)
             {
-                Console.WriteLine("success");
                 string content = await response.Content.ReadAsStringAsync();
-                Console.WriteLine(content);
                 IEnumerable<Administrator> admins = JsonConvert.DeserializeObject<IEnumerable<Administrator>>(content);
                 return admins;
             }

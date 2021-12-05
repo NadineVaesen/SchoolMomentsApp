@@ -8,22 +8,23 @@
   
     <ContentPage.Content>
         <StackLayout>
-        <StackLayout BindingContext="Moment">
-            <!--<StackLayout BindingContext="Moment">-->
-            <Label Text="{Binding Name}"
+        <StackLayout>
+   
+            <Label Text="{Binding Moment.Name}"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
-            <Label Text="{Binding Category}"/>
-            <Label Text="{Binding DateTime}"/>
-            <Label Text="{Binding Duration}"/>
+            <Label Text="{Binding Moment.Category}"/>
+            <Label Text="{Binding Moment.DateTime}"/>
+            <Label Text="{Binding Moment.Duration}"/>
 
         </StackLayout>
-        <!--<StackLayout>
-            <Button Text="Attending Students" Command="{Binding LoadAttendedStudents}"/>
+        <StackLayout>
+                <Button Text="Add Students to Moment" Command="{Binding AddStudent}"/>
+                <Button Text="Attending Students" Command="{Binding LoadAttendedStudents}"/>
             <Button Text="Requested Students" Command="{Binding LoadRequestedStudents}"/>
             <Button Text="Absent Students" Command="{Binding LoadAbsentStudents}"/>
             <Button Text="Register Student" Command="{Binding RegisterStudent}"/>
-        </StackLayout>-->
+        </StackLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

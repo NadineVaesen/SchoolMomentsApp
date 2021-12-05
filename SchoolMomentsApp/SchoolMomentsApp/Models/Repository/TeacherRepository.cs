@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using SchoolMomentsApp.Utility;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -10,13 +11,14 @@ namespace SchoolMomentsApp.Models.Repository
     public static class TeacherRepository
     {
 
-        private static HttpClient _httpClient = InitializeHttpClient();
-        private static Uri BaseUrl = new Uri("http://10.0.2.2:49630/api");
+        private static Uri url = Constants.BaseURL;
+        private static HttpClient _httpClient = Constants.HttpClient;
+
         private static IEnumerable<Teacher> teachers;
         public async static Task<IEnumerable<Teacher>> GetTeachers()
         {
    
-            Uri fullUrl = new Uri(BaseUrl + "/teachers");
+            Uri fullUrl = new Uri(url + "/teachers");
 
 
             HttpResponseMessage response = await _httpClient.GetAsync(fullUrl);
@@ -24,9 +26,9 @@ namespace SchoolMomentsApp.Models.Repository
 
             if (response.IsSuccessStatusCode)
             {
-                Console.WriteLine("success");
+
                 string content = await response.Content.ReadAsStringAsync();
-                Console.WriteLine(content);
+
                 teachers = JsonConvert.DeserializeObject<IEnumerable<Teacher>>(content);
                 return teachers;
             }
@@ -36,7 +38,7 @@ namespace SchoolMomentsApp.Models.Repository
         public async static Task<Teacher> GetTeacher(int id)
         {
             HttpClient httpClient = _httpClient;
-            Uri fullUrl = new Uri(BaseUrl + "teachers/" + id);
+            Uri fullUrl = new Uri(url + "/teachers/" + id);
             var options = new JsonSerializerSettings { };
 
 

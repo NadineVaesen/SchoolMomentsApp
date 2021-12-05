@@ -11,7 +11,7 @@ namespace SchoolMomentsApp.ViewModels
 {
     public class RegisterStudentForMomentViewModel : BaseViewModel
     {
-        private string studentnumber;
+        //private string studentnumber;
         private ICommand ConfirmStudentPresence;
 
         public RegisterStudentForMomentViewModel(INavigationService navigationService) : base(navigationService)

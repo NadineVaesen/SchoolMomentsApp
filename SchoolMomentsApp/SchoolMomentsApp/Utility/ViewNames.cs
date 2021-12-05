@@ -12,5 +12,6 @@ namespace SchoolMomentsApp.Utility
         public const string LoginView = "LoginView";
         public const string RegisterStudentForMomentView = "RegisterStudentForMomentView";
         public const string StudentMainPageView = "StudentMainPageView";
+        public const string AddRequestedStudentToMomentView = "AddRequestedStudentToMomentView";
     }
 }

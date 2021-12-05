@@ -11,8 +11,7 @@ namespace SchoolMomentsApp.Extensions
         {
             ObservableCollection<T> collection = new ObservableCollection<T>();
             foreach (T item in list)
-            {
-                Console.WriteLine("item List moments", item);
+            {      
                 collection.Add(item);
             }
 

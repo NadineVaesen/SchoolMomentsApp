@@ -9,6 +9,11 @@ namespace SchoolMomentsApp.Services
 {
     public class MomentDataService : IMomentDataService
     {
+        public async Task<Moment> AddRequestedStudent(int id, Moment moment)
+        {
+            return await MomentRepository.AddRequestedStudent(id, moment);
+        }
+
         public async Task<IEnumerable<Moment>> GetAllMomentsAsync()
         { 
             return await MomentRepository.GetMomentsAsync();

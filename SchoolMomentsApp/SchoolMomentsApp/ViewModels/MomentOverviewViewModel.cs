@@ -1,12 +1,7 @@
-﻿
-using SchoolMomentsApp.Extensions;
+﻿using SchoolMomentsApp.Extensions;
 using SchoolMomentsApp.Models;
 using SchoolMomentsApp.Services;
-using SchoolMomentsApp.Utility;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -17,7 +12,8 @@ namespace SchoolMomentsApp.ViewModels
     {
         
         private ObservableCollection<Moment> _moments;
-        public ICommand MomentSelectedCommand { get; }
+        public ICommand MomentSelectedCommand => new Command<Moment>(OnMomentSelection);
+
         public IMomentDataService _momentDataService;
         
         public ObservableCollection<Moment> Moments
@@ -34,7 +30,7 @@ namespace SchoolMomentsApp.ViewModels
         {
             _momentDataService = momentDataService;
       
-            MomentSelectedCommand = new Command<Moment>(OnMomentSelection);
+            //MomentSelectedCommand = new Command<Moment>(OnMomentSelection);
  
         }
 
@@ -49,9 +45,8 @@ namespace SchoolMomentsApp.ViewModels
 
         private void OnMomentSelection(Moment moment)
         {
-
             _navigationService.NavigateToAsync<MomentDetailViewModel>(moment);
-            
+                   
         }
     }
 }

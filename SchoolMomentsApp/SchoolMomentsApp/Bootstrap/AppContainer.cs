@@ -23,6 +23,7 @@ namespace SchoolMomentsApp.Bootstrap
             builder.RegisterType<RegisterStudentForMomentViewModel>();
             builder.RegisterType<StudentsOverviewViewModel>();
             builder.RegisterType<StudentMainPageViewModel>();
+            builder.RegisterType<AddRequestedStudentToMomentViewModel>();
 
             //services
             builder.RegisterType<LoginDataService>().As<ILoginDataService>();
