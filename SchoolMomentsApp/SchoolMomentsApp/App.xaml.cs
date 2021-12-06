@@ -37,6 +37,7 @@ namespace SchoolMomentsApp
         {
             var navigationService = AppContainer.Resolve<INavigationService>();
             await navigationService.InitializeAsync();
+            
         }
 
         protected override void OnStart()

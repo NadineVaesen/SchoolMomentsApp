@@ -138,6 +138,10 @@ namespace SchoolMomentsApp.Services
                 var mainPage = CurrentApplication.MainPage as MomentOverviewView;
 
             }
+            if(page is RegisterStudentForMomentView)
+            {
+                CurrentApplication.MainPage = page;
+            }
             if (page is MomentDetailView)
             {
                 CurrentApplication.MainPage = page;

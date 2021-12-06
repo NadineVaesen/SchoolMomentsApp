@@ -3,12 +3,18 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SchoolMomentsApp.Views.StudentMainPageView"
              xmlns:utility="clr-namespace:SchoolMomentsApp.Utility;assembly=SchoolMomentsApp"
+             xmlns:zxing="clr-namespace:ZXing.Net.Mobile.Forms;assembly=ZXing.Net.Mobile.Forms"
+             xmlns:zxingcommon="clr-namespace:ZXing.Common;assembly=zxing"
              utility:ViewModelLocator.AutoWireViewModel="True">
     <ContentPage.Content>
         <StackLayout>
-            <Button Text="Show Absences" Command="{Binding LoadAbsences}"/>
-            <Button Text="Show Presences" Command="{Binding LoadPresences}"/>
-            <Button Text="Show My QR code" Command="{Binding ShowQRCode}"/>
+            <Button Text="Show My Absences" Command="{Binding LoadAbsences}"/>
+            <Button Text="Show My Presences" Command="{Binding LoadPresences}"/>
+            <zxing:ZXingBarcodeImageView BarcodeValue="{Binding StudentNumber}" WidthRequest="500" HeightRequest="500">
+                <zxing:ZXingBarcodeImageView.BarcodeOptions>
+                    <zxingcommon:EncodingOptions Height="500" Width="500"/>
+                </zxing:ZXingBarcodeImageView.BarcodeOptions>
+            </zxing:ZXingBarcodeImageView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -32,7 +32,8 @@ namespace SchoolMomentsApp.Bootstrap
             builder.RegisterType<NavigationService>().As<INavigationService>();
             builder.RegisterType<StudentDataService>().As<IStudentDataService>();
             builder.RegisterType<TeacherDataService>().As<ITeacherDataService>();
-            builder.RegisterType<RestService>().As<IRestService>();
+            builder.RegisterType<RestService>().As<IRestService>().SingleInstance();
+            builder.RegisterType<QrScanningService>().As<IQrScanningService>();
 
             //repositories
             builder.RegisterType<StudentRepository>().As<IStudentRepository>();

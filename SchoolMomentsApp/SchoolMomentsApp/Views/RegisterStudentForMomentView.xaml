@@ -3,10 +3,17 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SchoolMomentsApp.Views.RegisterStudentForMomentView"
              xmlns:utility="clr-namespace:SchoolMomentsApp.Utility;assembly=SchoolMomentsApp"
+             xmlns:zxing="clr-namespace:ZXing.Net.Mobile.Forms;assembly=ZXing.Net.Mobile.Forms"
              utility:ViewModelLocator.AutoWireViewModel="True">
     <ContentPage.Content>
         <StackLayout>
            <!--Talk to the qr code to get the studentnumber-->
+            <Button Text="Click"  
+                x:Name="btnScan"  
+                Command="{Binding ScanCommand}"/>
+            <Label   
+               Text="{Binding ScannedNumber}"/>
+
             <Label Text="{Binding ErrorMessage}"/>
             <Label Text="{Binding StudentName}"/>
             <Button Text="Confirm Presence" Command="{Binding ConfirmStudentPresence}"/>

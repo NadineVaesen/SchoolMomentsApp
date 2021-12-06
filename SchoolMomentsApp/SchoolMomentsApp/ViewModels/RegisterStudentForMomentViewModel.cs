@@ -13,6 +13,23 @@ namespace SchoolMomentsApp.ViewModels
     {
         //private string studentnumber;
         private ICommand ConfirmStudentPresence;
+        private IQrScanningService _qrScanningService;
+
+        private ICommand ScanCommand => new Command(GetScanResult);
+
+        private string _scannedNumber;
+        public string ScannedNumber
+        {
+            get { return _scannedNumber; }
+            set { _scannedNumber= value;
+                OnPropertyChanged();
+            }
+        }
+
+        public RegisterStudentForMomentViewModel(INavigationService navigationService, IQrScanningService qrScanningService): base(navigationService)
+        {
+            _qrScanningService = qrScanningService;
+        }
 
         public RegisterStudentForMomentViewModel(INavigationService navigationService) : base(navigationService)
         {
@@ -31,6 +48,22 @@ namespace SchoolMomentsApp.ViewModels
         //YES? show StudentName to confirm it's presence
         //NO? show Message => student is not supposed to be in this lesson
 
+        private async void GetScanResult()
+        {
+            try
+            {
+                var result = _qrScanningService.ScanAsync();
+                if (result != null)
+                {
+                    ScannedNumber = result.Result;
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
 
     }
 }
