@@ -10,9 +10,6 @@ namespace SchoolMomentsApp.Utility
 
         public static Uri BaseURL = new Uri("http://10.0.2.2:49630/api");
 
-        private static HttpClient InitializeHttpClient()
-        {
-            return HttpClient ?? new HttpClient();
-        }
+  
     }
 }
